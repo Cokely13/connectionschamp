@@ -4,13 +4,6 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import {me} from './store'
-import Users from './components/Users'
-import UserDetailPage from './components/UserDetailPage';
-import Profile from './components/Profile';
-import CreateQuestion from './components/CreateQuestion';
-import DailyLeaderboard from './components/DailyLeaderboard';
-import CareerLeaderboard from './components/CareerLeaderboard';
-import Archive from './components/Archive';
 
 /**
  * COMPONENT
@@ -28,13 +21,13 @@ class Routes extends Component {
         {isLoggedIn ? (
           <Switch>
             <Route exact path="/home" component={Home} />
-            <Route exact path="/profile" component={Profile} />
+            {/* <Route exact path="/profile" component={Profile} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
             <Route exact path="/leaderboard" component={DailyLeaderboard} />
             <Route exact path="/archive" component={Archive} />
             <Route exact path="/career" component={CareerLeaderboard} />
-            <Route exact path="/create" component={CreateQuestion} />
+            <Route exact path="/create" component={CreateQuestion} /> */}
             <Redirect to="/home" />
           </Switch>
         ) : (
