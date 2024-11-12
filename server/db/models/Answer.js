@@ -2,12 +2,16 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const Answer = db.define('answer', {
-  text: {
-    type: Sequelize.STRING,
+  number: {
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
-  rank: {
+  strikes: {
     type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  correct: {
+    type: Sequelize.BOOLEAN,
     allowNull: false,
   },
 });

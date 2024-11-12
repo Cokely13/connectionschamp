@@ -14,6 +14,9 @@ const User = require('./models/User');
 User.hasMany(UserScore);
 UserScore.belongsTo(User);
 
+User.hasMany(Answer)
+Answer.belongsTo(User)
+
 
 
 module.exports = {
