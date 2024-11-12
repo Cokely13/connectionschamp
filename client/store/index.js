@@ -5,15 +5,15 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import auth from './auth'
 import usersReducer from './allUsersStore'
 import singleUserReducer from './singleUserStore'
-import singleGuessReducer from './singleGuessStore'
-import guessesReducer from './allGuessesStore'
+import singleAnswerReducer from './singleAnswerStore'
+import answersReducer from './allAnswersStore'
 
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
   singleUser: singleUserReducer,
-  singleGuess: singleGuessReducer,
-  allGuesses: guessesReducer
+  singleAnswer: singleAnswerReducer,
+  allAnswers: answersReducer
  })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
