@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Upload from './Upload';
 
 
 /**
@@ -10,7 +11,7 @@ export const Home = (props) => {
 
   return (
     <div className="home-container">
-      Hey
+     <Upload/>
     </div>
   );
 };
