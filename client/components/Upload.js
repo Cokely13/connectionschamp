@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createAnswer } from '../store/allAnswersStore'; // Adjust the path as necessary
+import { createAnswer, fetchAnswers } from '../store/allAnswersStore';
 import { fetchSingleUser } from '../store/singleUserStore';
 
 const Upload = () => {
@@ -9,9 +9,11 @@ const Upload = () => {
   const dispatch = useDispatch();
   const { id } = useSelector((state) => state.auth);
   const user = useSelector((state) => state.singleUser);
+  const answers = useSelector((state) => state.allAnswers || []);
 
   useEffect(() => {
     dispatch(fetchSingleUser(id));
+    dispatch(fetchAnswers());
   }, [dispatch, id]);
 
   const parseSharedResults = (text) => {
@@ -69,6 +71,14 @@ const Upload = () => {
   const handleSubmit = () => {
     const parsedResult = parseSharedResults(sharedText);
     if (parsedResult) {
+      const existingAnswer = answers.find(
+        (answer) => answer.userId === id && answer.number === parsedResult.number
+      );
+
+      if (existingAnswer) {
+        alert('You have already submitted an answer for this puzzle.');
+        return;
+      }
       // Check if the user got it correct or has exactly 4 strikes
       if (parsedResult.correct || parsedResult.strikes === 4) {
         setParsedData(parsedResult);

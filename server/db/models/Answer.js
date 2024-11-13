@@ -14,6 +14,15 @@ const Answer = db.define('answer', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
   },
-});
+},
+  {
+    indexes: [
+      {
+        unique: true,
+        fields: ['userId', 'number'],
+      },
+    ],
+  }
+);
 
 module.exports = Answer;
