@@ -1677,3 +1677,28 @@ archive */
 .parsed-results strong {
   font-weight: bold;
 }
+
+@media (max-width: 600px) {
+  .upload-container {
+    margin: 50px auto; /* Reduce top margin on smaller screens */
+    padding: 15px;
+  }
+
+  .upload-heading {
+    font-size: 22px;
+  }
+
+  .upload-textarea {
+    width: 100%; /* Make textarea full width */
+    font-size: 16px;
+  }
+
+  .upload-button {
+    width: 80%; /* Increase button width */
+    font-size: 16px;
+  }
+
+  .parsed-results p {
+    font-size: 14px;
+  }
+}
