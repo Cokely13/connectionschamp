@@ -90,7 +90,7 @@ const Upload = () => {
         value={sharedText}
         onChange={(e) => setSharedText(e.target.value)}
         placeholder="Paste your results here..."
-        rows="6"
+        rows="10"
         cols="50"
       ></textarea>
       <button className="upload-button" onClick={handleSubmit}>
@@ -100,7 +100,7 @@ const Upload = () => {
       {/* Display the parsed results */}
       {parsedData && (
         <div className="parsed-results">
-          <h3>Parsed Results:</h3>
+          <h3>Submitted Results:</h3>
           <p>
             <strong>Puzzle Number:</strong> {parsedData.number}
           </p>

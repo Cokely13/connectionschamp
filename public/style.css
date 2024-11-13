@@ -1628,7 +1628,9 @@ archive */
 }
 
 .upload-textarea {
-  width: 100%;
+  display: block;
+  width: 90%; /* Reduced from 100% to 90% */
+  margin: 0 auto;
   padding: 10px;
   font-size: 16px;
   resize: vertical;
@@ -1638,9 +1640,11 @@ archive */
 
 .upload-button {
   display: block;
-  width: 100%;
+  width: 50%; /* Match width of textarea */
+  margin: 15px auto 0 auto;
   padding: 12px 0;
-  margin-top: 15px;
+  border-radius: 10px;
+  /* margin-top: 15px; */
   background-color: #007BFF; /* Blue background */
   color: #fff;
   font-size: 18px;
