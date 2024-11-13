@@ -7,6 +7,7 @@ import Upload from './components/Upload';
 import DailyLeaderboard from './components/DailyLeaderboard';
 import {me} from './store'
 import CareerLeaderboard from './components/CareerLeaderboard';
+import Profile from './components/Profile';
 
 /**
  * COMPONENT
@@ -27,8 +28,8 @@ class Routes extends Component {
             <Route exact path="/upload" component={Upload} />
             <Route exact path="/leaderboard" component={DailyLeaderboard} />
             <Route exact path="/career" component={CareerLeaderboard} />
-            {/* <Route exact path="/profile" component={Profile} />
-            <Route exact path="/users" component={Users} />
+            <Route exact path="/profile" component={Profile} />
+            {/* <Route exact path="/users" component={Users} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
 
             <Route exact path="/archive" component={Archive} />
