@@ -1,97 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { fetchAnswers } from '../store/allAnswersStore';
-// import { fetchUsers } from '../store/allUsersStore';
-
-// function DailyLeaderboard() {
-//   const dispatch = useDispatch();
-//   const answers = useSelector((state) => state.allAnswers || []);
-//   const users = useSelector((state) => state.allUsers || []);
-
-//   // State for selected date
-//   const todayDate = new Date().toISOString().split('T')[0];
-//   const [selectedDate, setSelectedDate] = useState(todayDate);
-
-//   useEffect(() => {
-//     dispatch(fetchAnswers());
-//     dispatch(fetchUsers());
-//   }, [dispatch]);
-
-//   // Create a map of userId to username and image for quick lookup
-//   const usersMap = {};
-//   users.forEach((user) => {
-//     usersMap[user.id] = { username: user.username, image: user.image };
-//   });
-
-
-
-//   // Render the leaderboard
-//   return (
-//     <div className="leaderboard-container">
-//       <h2 className="leaderboard-heading">
-//         Leaderboard for {selectedAnswer.number}
-//       </h2>
-
-//       {/* Date Selection Dropdown */}
-//       <div className="date-selection">
-//         <label htmlFor="date-select">Select Date: </label>
-//         <select
-//           id="date-select"
-//           value={selectedDate}
-//           onChange={(e) => setSelectedDate(e.target.value)}
-//         >
-//           {uniqueDateOptions.map((option) => (
-//             <option key={option.dateAsked} value={option.dateAsked}>
-//               {option.formattedDate}
-//             </option>
-//           ))}
-//         </select>
-//       </div>
-
-//       {/* Display Answer Text */}
-//       {selectedAnswer ? (
-//         <div className="question-text">
-//           <p>{selectedAnswer.text}</p>
-//         </div>
-//       ) : (
-//         <div className="no-question">
-//           <p>No Answer</p>
-//         </div>
-//       )}
-
-//       {leaderboard.length > 0 ? (
-//         <table className="leaderboard-table">
-//           <thead>
-//             <tr>
-//               <th>User</th>
-//               <th>Rank</th>
-//               <th>Points</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {leaderboard.map((user) => (
-//               <tr key={user.userId}>
-//                 <td>
-//   <div className="user-info">
-//     <img src={user.image} alt={user.username} className="user-img" />
-//     <span className="username">{user.username}</span>
-//   </div>
-// </td>
-//                 <td style={{ textAlign: 'center' }}>{user.rank}</td>
-//                 <td style={{ textAlign: 'center' }}>{user.points}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       ) : (
-//         <p className="no-guesses">No guesses have been made for this date.</p>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default DailyLeaderboard;
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAnswers } from '../store/allAnswersStore';
@@ -103,7 +9,10 @@ function DailyLeaderboard() {
   const users = useSelector((state) => state.allUsers || []);
 
   // State for selected puzzle number
-  const [selectedNumber, setSelectedNumber] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  console.log("select", selectedDate)
+
 
   useEffect(() => {
     dispatch(fetchAnswers());
@@ -117,17 +26,20 @@ function DailyLeaderboard() {
   });
 
   // Extract unique puzzle numbers from answers and sort them
-  const uniqueNumbers = [...new Set(answers.map((answer) => answer.number))].sort((a, b) => a - b);
+  // const uniqueDates= [...new Set(answers.map((answer) => answer.date))].sort((a, b) => a - b);
+  const uniqueDates = [...new Set(answers.map((answer) => answer.date))]
+  .sort((a, b) => new Date(a) - new Date(b));
+
 
   // Set default selectedNumber to the latest puzzle number if not set
   useEffect(() => {
-    if (uniqueNumbers.length > 0 && selectedNumber === null) {
-      setSelectedNumber(uniqueNumbers[uniqueNumbers.length - 1]); // Select the latest puzzle by default
+    if (uniqueDates.length > 0 && selectedDate === null) {
+      setSelectedDate(uniqueDates[uniqueDates.length - 1]); // Select the latest puzzle by default
     }
-  }, [uniqueNumbers, selectedNumber]);
+  }, [uniqueDates, selectedDate]);
 
   // Filter answers for the selected puzzle number
-  const filteredAnswers = answers.filter((answer) => answer.number === selectedNumber);
+  const filteredAnswers = answers.filter((answer) => answer.date === selectedDate);
 
   // Sort users with fewest number of strikes at the top
   const leaderboard = filteredAnswers
@@ -148,19 +60,19 @@ function DailyLeaderboard() {
   // Render the leaderboard
   return (
     <div className="leaderboard-container">
-      <h2 className="leaderboard-heading">Leaderboard for Puzzle #{selectedNumber}</h2>
+      <h2 className="leaderboard-heading">Leaderboard for Puzzle {selectedDate}</h2>
 
       {/* Puzzle Number Selection Dropdown */}
       <div className="number-selection">
-        <label htmlFor="number-select">Select Puzzle Number: </label>
+        <label htmlFor="number-select">Select Date: </label>
         <select
           id="number-select"
-          value={selectedNumber || ''}
-          onChange={(e) => setSelectedNumber(parseInt(e.target.value, 10))}
+          value={selectedDate|| ''}
+          onChange={(e) => setSelectedDate(e.target.value)}
         >
-          {uniqueNumbers.map((number) => (
+          {uniqueDates.map((number) => (
             <option key={number} value={number}>
-              Puzzle #{number}
+              {number}
             </option>
           ))}
         </select>
