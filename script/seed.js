@@ -1,13 +1,8 @@
 'use strict';
 const {
   db,
-  models: { User,  Answer},
+  models: { User, Answer },
 } = require('../server/db');
-
-
-
-
-
 
 async function seed() {
   await db.sync({ force: true }); // Clears db and matches models to tables
@@ -38,24 +33,70 @@ async function seed() {
     }),
   ]);
 
-  // Helper functions
-  const addDays = (date, days) => {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result.toISOString().split('T')[0]; // Convert to YYYY-MM-DD format
+  // Map users by username in lowercase for easy access
+  const usersObj = {
+    ryan: users[0],
+    matt: users[1],
+    scott: users[2],
+    jamal: users[3],
   };
 
-  const adjustDays = (date, days) => {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result.toISOString().split('T')[0];
+  // Define puzzle numbers
+  const puzzleNumbers = [1, 2, 3, 4, 5];
+
+  // Define dummy answers for each user
+  const data = {
+    ryan: [
+      { number: 1, correct: true, strikes: 0 },
+      { number: 2, correct: false, strikes: 4 },
+      { number: 3, correct: true, strikes: 1 },
+      { number: 4, correct: true, strikes: 3 },
+      { number: 5, correct: true, strikes: 2 },
+    ],
+    matt: [
+      { number: 1, correct: false, strikes: 4 },
+      { number: 2, correct: false, strikes: 4 },
+      { number: 3, correct: false, strikes: 4 },
+      { number: 4, correct: false, strikes: 4 },
+      { number: 5, correct: true, strikes: 1 },
+    ],
+    scott: [
+      { number: 1, correct: true, strikes: 0 },
+      { number: 2, correct: true, strikes: 2 },
+      { number: 3, correct: false, strikes: 4 },
+      { number: 4, correct: true, strikes: 1 },
+      { number: 5, correct: false, strikes: 4 },
+    ],
+    jamal: [
+      { number: 1, correct: false, strikes: 4 },
+      { number: 2, correct: false, strikes: 4 },
+      { number: 3, correct: true, strikes: 0 },
+      { number: 4, correct: false, strikes: 4 },
+      { number: 5, correct: true, strikes: 3 },
+    ],
   };
 
-  const today = new Date().toISOString().split('T')[0];
+  // Create Answers
+  const answerPromises = [];
+  for (const username in data) {
+    const user = usersObj[username];
+    const answersData = data[username];
+    for (const answerData of answersData) {
+      answerPromises.push(
+        Answer.create({
+          userId: user.id,
+          number: answerData.number,
+          correct: answerData.correct,
+          strikes: answerData.strikes,
+        })
+      );
+    }
+  }
 
-
+  await Promise.all(answerPromises);
 
   console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${answerPromises.length} answers`);
   console.log('seeded successfully');
 
   return {
@@ -65,7 +106,7 @@ async function seed() {
       scott: users[2],
       jamal: users[3],
     },
-    // You can return questions and answers if needed
+    // You can return answers if needed
   };
 }
 
