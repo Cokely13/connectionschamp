@@ -2,7 +2,7 @@
 require('dotenv').config();
 const router = require('express').Router();
 const {
-  models: { User, Guess},
+  models: { User, Answer},
 } = require('../db');
 module.exports = router;
 const { S3Client } = require('@aws-sdk/client-s3'); // AWS SDK v3
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ['id', 'username', 'totalPoints', 'admin', 'image', 'email', 'wins'],
-      include: [ Guess
+      include: [ Answer
       ],
     });
     res.json(users);
@@ -80,7 +80,7 @@ router.post('/', upload.single('image'), async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {include: [{
-      model: Guess,
+      model: Answer,
     }],
       attributes: ['id', 'username', 'totalPoints', 'admin', 'image', 'email', 'wins'],
     });
