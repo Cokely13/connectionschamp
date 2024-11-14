@@ -9,8 +9,8 @@ const setMessages = (messages) => ({ type: SET_MESSAGES, messages });
 const _createMessage = (message) => ({ type: CREATE_MESSAGE, message });
 const _deleteMessage = (id) => ({ type: DELETE_MESSAGE, id });
 
-export const fetchMessages = (groupId) => async (dispatch) => {
-  const { data } = await Axios.get(`/api/messages/${groupId}`);
+export const fetchMessages = (puzzleNumber) => async (dispatch) => {
+  const { data } = await Axios.get(`/api/messages/${puzzleNumber}`);
   dispatch(setMessages(data));
 };
 

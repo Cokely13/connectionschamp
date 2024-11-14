@@ -41,12 +41,25 @@ const {
   models: { Message, User },
 } = require('../db');
 
+
+router.get('/', async (req, res, next) => {
+  try {
+    const groups = await Message.findAll({
+      include: [ User
+      ],
+    });
+    res.json(groups);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Get messages for a puzzle number
 router.get('/:puzzleNumber', async (req, res, next) => {
   try {
     const messages = await Message.findAll({
       where: { puzzleNumber: req.params.puzzleNumber },
-      include: [{ model: User, attributes: ['id', 'userName', 'image'] }],
+      include: [{ model: User, attributes: ['id', 'username', 'image'] }],
       order: [['createdAt', 'ASC']],
     });
     res.json(messages);
@@ -58,8 +71,9 @@ router.get('/:puzzleNumber', async (req, res, next) => {
 // Post a new message
 router.post('/', async (req, res, next) => {
   try {
-    const { content, puzzleNumber } = req.body;
-    const userId = req.user.id; // Ensure req.user is set by authentication middleware
+
+    const { content, puzzleNumber, userId } = req.body;
+    // const userId = req.user.id;
 
     const message = await Message.create({ content, puzzleNumber, userId });
     res.status(201).json(message);
