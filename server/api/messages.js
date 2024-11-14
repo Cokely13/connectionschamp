@@ -91,11 +91,6 @@ router.delete('/:id', async (req, res, next) => {
       return res.status(404).json({ error: 'Message not found' });
     }
 
-    const userId = req.user.id; // Ensure req.user is set by authentication middleware
-
-    if (message.userId !== userId /* && !req.user.isAdmin */) {
-      return res.status(403).json({ error: 'Unauthorized' });
-    }
 
     await message.destroy();
     res.sendStatus(204);
