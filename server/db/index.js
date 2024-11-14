@@ -2,17 +2,15 @@ const db = require('./db');
 
 
 const Answer = require('./models/Answer');
-const UserScore = require('./models/UserScore');
-
+const Message = require('./models/Message');
 const User = require('./models/User');
 
 // Associations:
 
+Message.belongsTo(User);
+User.hasMany(Message);
 
 
-// Associations between User and UserScore
-User.hasMany(UserScore);
-UserScore.belongsTo(User);
 
 User.hasMany(Answer)
 Answer.belongsTo(User)
@@ -24,6 +22,6 @@ module.exports = {
   models: {
     User,
     Answer,
-    UserScore,
+    Message
   },
 };

@@ -7,13 +7,15 @@ import usersReducer from './allUsersStore'
 import singleUserReducer from './singleUserStore'
 import singleAnswerReducer from './singleAnswerStore'
 import answersReducer from './allAnswersStore'
+import messagesReducer from './allMessagesStore'
 
 
 const reducer = combineReducers({ auth,
   allUsers: usersReducer,
   singleUser: singleUserReducer,
   singleAnswer: singleAnswerReducer,
-  allAnswers: answersReducer
+  allAnswers: answersReducer,
+  allMessages: messagesReducer
  })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
