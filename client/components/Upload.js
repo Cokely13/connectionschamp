@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { createAnswer, fetchAnswers } from '../store/allAnswersStore';
 import { fetchSingleUser } from '../store/singleUserStore';
@@ -137,6 +138,9 @@ const Upload = () => {
           </p>
           <p>
             <strong>Correct:</strong> {parsedData.correct ? 'Yes' : 'No'}
+          </p>
+          <p>
+          <Link to={`/leaderboard`}>Go To Leaderboard</Link>
           </p>
         </div>
       )}
