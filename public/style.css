@@ -1532,3 +1532,7 @@ archive */
   font-weight: bold;
   color: #007BFF; /* Blue color */
 }
+
+.number-selection {
+  margin-bottom: 20px;
+}
