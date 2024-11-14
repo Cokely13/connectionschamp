@@ -13,7 +13,7 @@ function Profile() {
   let history = useHistory();
   const {id} = useSelector((state) => state.auth )
   const user = useSelector((state) => state.singleUser )
-  const answers = useSelector((state) => state.allAnswers )
+  // const answers = useSelector((state) => state.allAnswers )
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const [newPhoto, setNewPhoto] = useState(null);
@@ -31,29 +31,32 @@ function Profile() {
   }, [dispatch,])
 
 
-// const recentResult = () => {
-//   const recent = user.results ? user.results : []
-//     recent.sort((a, b) => new Date(b.date) - new Date(a.date))
-//     .slice(0, 1);
+console.log("users", user)
 
-//   if (recent.length > 0) {
-//     return recent[0].date
-//   }
+const answers = Array.isArray(user.answers) ? user.answers : [];
 
-//   return null;
-// };
+const totalStats = answers.reduce(
+  (acc, answer) => {
+    // Add up strikes
+    acc.totalStrikes += answer.strikes;
 
-// const recentWorkout = () => {
-//   const recent = user.userworkouts ? user.userworkouts : []
-//     recent.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-//     .slice(0, 1);
+    // Count correct and incorrect answers
+    if (answer.correct) {
+      acc.correctCount += 1;
+    } else {
+      acc.incorrectCount += 1;
+    }
 
-//   if (recent.length > 0) {
-//     return recent[0].updatedAt.slice(0, 10)
-//   }
+    return acc;
+  },
+  { totalStrikes: 0, correctCount: 0, incorrectCount: 0 }
+);
 
-//   return null;
-// };
+// Access the results
+const totalStrikes = totalStats.totalStrikes;
+const totalCorrect = totalStats.correctCount;
+const totalIncorrect = totalStats.incorrectCount;
+
 
 const imageUrl = user.image
 
@@ -121,20 +124,12 @@ const handlePassword = () => {
             }}> </div>
     </div>
   )}
-    {/* <div style={{fontSize:"25px"}} >
+    <div style={{fontSize:"25px"}} >
     <div><b> {user.email ? user.email : 0} </b></div>
-    <div><b>Total Workouts:</b> {user.userworkouts ? user.userworkouts.length : 0}</div>
-    <div><b>Total Results:</b> {user.results ? user.results.length : 0}</div>
-    <div><b>Total Challenges:</b> {user.challenges ? user.challenges.length : 0}</div>
-    <div><b>Challenge Wins:</b>  {user.challenges
-    ? user.challenges.filter(challenge => challenge.champ === id).length
-    : 0}</div>
-    <div><b>Most Recent Result: </b>{recentResult()} </div>
-    <div><b>Most Recent Workout: </b>{recentWorkout()} </div>
-    <div><Link to={`/medals`}>Medals</Link></div>
-    <div><Link to={`/myresults`}>MyResults</Link></div>
-    <div><Link to={`/target`}>TargetTimes</Link></div>
-    </div> */}
+    <div><b>Total Wins:</b> {user.answers ? totalCorrect : 0}</div>
+    <div><b>Total Loses:</b> {user.answers ? totalIncorrect : 0}</div>
+    <div><b>Total Strikes:</b> {user.answers ? totalStrikes : 0}</div>
+    </div>
      <button className="btn btn-primary" onClick={() => handlePassword()}>Change Password</button>
      {newPhoto ? <div style={{ margin: '20px 0' }} >
         <input  type="file" onChange={handleFileChange} />
