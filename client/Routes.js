@@ -8,6 +8,8 @@ import DailyLeaderboard from './components/DailyLeaderboard';
 import {me} from './store'
 import CareerLeaderboard from './components/CareerLeaderboard';
 import Profile from './components/Profile';
+import Users from './components/Users'
+import UserDetailPage from './components/UserDetailPage';
 
 /**
  * COMPONENT
@@ -29,10 +31,10 @@ class Routes extends Component {
             <Route exact path="/leaderboard" component={DailyLeaderboard} />
             <Route exact path="/career" component={CareerLeaderboard} />
             <Route exact path="/profile" component={Profile} />
-            {/* <Route exact path="/users" component={Users} />
+            <Route exact path="/users" component={Users} />
             <Route exact path="/users/:userId" component={UserDetailPage} />
 
-            <Route exact path="/archive" component={Archive} />
+            {/* <Route exact path="/archive" component={Archive} />
             <Route exact path="/career" component={CareerLeaderboard} />
             <Route exact path="/create" component={CreateQuestion} /> */}
             <Redirect to="/home" />
