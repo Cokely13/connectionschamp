@@ -606,13 +606,37 @@
 }
 
 .home-container {
-  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
+@media (min-width: 768px) {
+  .home-container {
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; */
+    max-width: 800px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    position: relative;
+  }
+
+
+
+
+}
+
+
 .entries-wrapper {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  /* position: absolute; */
+  position: fixed;
+  top: 10px; /* Adjust this value to move it further up or down */
+  right: 40px;
+  /* top: 20px;
+  right: 20px; */
+  z-index: 1;
 }
 
 @media (max-width: 600px) {
@@ -620,7 +644,10 @@
     position: static;
     margin: 0 auto;
     text-align: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+  }
+  .entries-container {
+    margin-top: 20px; /* Reduce margin-top to 20px for mobile */
   }
 }
 
@@ -1246,51 +1273,6 @@ archive */
   }
 }
 
-/* Modal.css */
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
-
-.modal-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal-content {
-  position: relative;
-  background-color: white;
-  width: 80%;
-  max-width: 500px;
-  margin: 100px auto;
-  padding: 20px;
-  z-index: 1001;
-  border-radius: 8px;
-  text-align: center;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-}
-
-.modal-content button {
-  margin-top: 20px;
-  padding: 10px 20px;
-}
-
-.modal-close-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-}
- */
 
  /* Modal.css */
 /* Modal.css */
@@ -1423,61 +1405,62 @@ archive */
 }
 
 .upload-container {
-  max-width: 600px;
-  margin: 100px auto; /* Centers the container and adds top margin */
-  padding: 20px;
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 8px; /* Rounded corners */
-  background-color: #f9f9f9; /* Light background color */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-top: 300px;
+  padding: 25px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .upload-heading {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 26px;
+  color: #333;
 }
 
 .upload-textarea {
-  display: block;
+  width: 100%;
   width: 90%; /* Reduced from 100% to 90% */
   margin: 0 auto;
-  padding: 10px;
+  display: block;
+  padding: 15px;
   font-size: 16px;
-  resize: vertical;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 .upload-button {
-  display: block;
-  width: 50%; /* Match width of textarea */
-  margin: 15px auto 0 auto;
-  padding: 12px 0;
-  border-radius: 10px;
-  /* margin-top: 15px; */
-  background-color: #007BFF; /* Blue background */
+  width: 90%; /* Reduced from 100% to 90% */
+  margin: 0 auto;
+  padding: 15px;
+  margin-top: 15px;
+  background-color: #5151E5;
   color: #fff;
   font-size: 18px;
   font-weight: bold;
-  text-align: center;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
 .upload-button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #4141d5;
 }
 
 .parsed-results {
   margin-top: 30px;
-  padding: 15px;
-  border-top: 1px solid #ccc;
+  padding: 20px;
+  border-top: 1px solid #eee;
 }
 
 .parsed-results h3 {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #333;
 }
 
 .parsed-results p {
@@ -1489,10 +1472,19 @@ archive */
   font-weight: bold;
 }
 
+body {
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #333;
+}
+
 @media (max-width: 600px) {
   .upload-container {
-    margin: 50px auto; /* Reduce top margin on smaller screens */
-    padding: 15px;
+    margin-top: 30px;
   }
 
   .upload-heading {
@@ -1501,11 +1493,15 @@ archive */
 
   .upload-textarea {
     width: 100%; /* Make textarea full width */
+    width: 90%; /* Reduced from 100% to 90% */
+  margin: 0 auto;
     font-size: 16px;
   }
 
   .upload-button {
-    width: 80%; /* Increase button width */
+    width: 60%; /* Reduced from 100% to 90% */
+  margin: 0 auto;
+  margin-top: 15px;
     font-size: 16px;
   }
 
@@ -1515,22 +1511,25 @@ archive */
 }
 
 .entries-container {
-  max-width: 600px;
   text-align: center;
-  border: 5px solid blue;
+  margin-top: 100px;
+  display: inline-block;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
+  background: linear-gradient(135deg, #72EDF2 10%, #5151E5 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .entries-heading {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .entries-count {
-  font-size: 48px;
+  margin: 10px auto;
+  font-size: 50px;
   font-weight: bold;
-  color: #007BFF; /* Blue color */
 }
 
 .number-selection {
