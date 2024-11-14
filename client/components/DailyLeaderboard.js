@@ -157,69 +157,72 @@ function DailyLeaderboard() {
           <h3 className="message-board-title">Message Board</h3>
           {/* Message List */}
           <div className="message-list">
-            {messages.length > 0 ? (
-              messages.map((message) => (
-                <div key={message.id} className="message-item">
-                  <div className="message-content">
-                    {/* User Image and Username */}
-                    {message.user ? (
-                      <div className="user-info">
-                        {message.user.image ? (
-                          <img
-                            src={message.user.image}
-                            alt={`${message.user.username}'s avatar`}
-                            className="message-user-image"
-                          />
-                        ) : (
-                          <div className="message-placeholder-image">
-                            {message.user.username.charAt(0).toUpperCase()}
-                          </div>
-                        )}
-                        <p className="message-username">{message.user.username}</p>
-                      </div>
-                    ) : (
-                      <div className="user-info">
-                        <div className="message-placeholder-image">N</div>
-                        <p className="message-username">New Post</p>
-                      </div>
-                    )}
+  {messages.length > 0 ? (
+    messages.map((message) => {
+      // Format the createdAt date to display only the date part
+      const formattedDate = new Date(message.createdAt).toLocaleDateString();
 
-                    {/* Message Bubble */}
-                    <div className="message-bubble">
-                      <p className="message-text">{message.content}</p>
+      return (
+        <div key={message.id} className="message-item">
+          {/* User Info and Message in a Row */}
+          <div className="message-row">
+            {/* User Image and Username */}
+            <div className="user-info">
+              {message.user ? (
+                <>
+                  {message.user.image ? (
+                    <img
+                      src={message.user.image}
+                      alt={`${message.user.username}'s avatar`}
+                      className="user-img"
+                    />
+                  ) : (
+                    <div className="message-placeholder-image">
+                      {message.user.username.charAt(0).toUpperCase()}
                     </div>
-                  </div>
-                  {/* Delete Button */}
-                  {message.userId === currentUserId && (
-                    <button
-                      onClick={() => handleDeleteMessage(message.id)}
-                      className="message-delete-button"
-                    >
-                      Delete
-                    </button>
                   )}
-                </div>
-              ))
-            ) : (
-              <p>No messages yet. Be the first to post!</p>
+                  <p className="message-username">{message.user.username}</p>
+                </>
+              ) : (
+                <>
+                  <div className="message-placeholder-image">N</div>
+                  <p className="message-username">New Post</p>
+                </>
+              )}
+            </div>
+
+            {/* Message Content */}
+            <div className="message-content">
+              {/* Date in the upper right corner */}
+              {/* <div className="message-date">{formattedDate}</div> */}
+              <div className="message-timestamp">
+  {new Date(message.createdAt).toLocaleString()}
+</div>
+              <p className="message-text">{message.content}</p>
+            </div>
+
+            {/* Delete Button */}
+            {message.userId === currentUserId && (
+              <button
+                onClick={() => handleDeleteMessage(message.id)}
+                className="message-delete-button"
+              >
+                Delete
+              </button>
             )}
           </div>
-          {/* Message Input */}
-          <div className="message-input-container">
-            <textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message here..."
-              className="message-input"
-            ></textarea>
-            <button onClick={handlePostMessage} className="message-post-button">
-              Post Message
-            </button>
-          </div>
         </div>
-      )}
-    </div>
-  );
+      );
+    })
+  ) : (
+    <p>No messages yet. Be the first to post!</p>
+  )}
+</div>
+</div>
+)
+}
+</div>
+)
 }
 
 export default DailyLeaderboard;
