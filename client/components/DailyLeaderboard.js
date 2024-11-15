@@ -193,8 +193,6 @@ function DailyLeaderboard() {
 
             {/* Message Content */}
             <div className="message-content">
-              {/* Date in the upper right corner */}
-              {/* <div className="message-date">{formattedDate}</div> */}
               <div className="message-timestamp">
   {new Date(message.createdAt).toLocaleString()}
 </div>
