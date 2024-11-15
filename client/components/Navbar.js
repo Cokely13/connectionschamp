@@ -162,9 +162,9 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
         <div className="modal-overlay" onClick={closeRulesModal}>
           <div className="modalrules-content" onClick={(e) => e.stopPropagation()}>
             <span className="close-button" onClick={closeRulesModal}>&times;</span>
-            <h2>Rules</h2>
+            <h2>Instructions</h2>
             <p>
-              The top 10 answers are listed. Get points for every top 5 answer and a strike for every answer not in the top 10. 3 strikes and you're OUT!
+              Paste your results from the NYTimesConnection in the home page and click submit to upload your score!
             </p>
           </div>
         </div>
