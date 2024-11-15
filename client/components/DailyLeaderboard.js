@@ -218,6 +218,17 @@ function DailyLeaderboard() {
     <p>No messages yet. Be the first to post!</p>
   )}
 </div>
+<div className="message-input-container">
+      <textarea
+        value={newMessage}
+        onChange={(e) => setNewMessage(e.target.value)}
+        placeholder="Type your message here..."
+        className="message-input"
+      ></textarea>
+      <button onClick={handlePostMessage} className="message-post-button">
+        Post Message
+      </button>
+    </div>
 </div>
 )
 }

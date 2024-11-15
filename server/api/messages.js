@@ -69,18 +69,39 @@ router.get('/:puzzleNumber', async (req, res, next) => {
 });
 
 // Post a new message
+// router.post('/', async (req, res, next) => {
+//   try {
+
+//     const { content, puzzleNumber, userId } = req.body;
+//     // const userId = req.user.id;
+
+//     const message = await Message.create({ content, puzzleNumber, userId });
+//     res.status(201).json(message);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.post('/', async (req, res, next) => {
   try {
-
     const { content, puzzleNumber, userId } = req.body;
     // const userId = req.user.id;
 
-    const message = await Message.create({ content, puzzleNumber, userId });
-    res.status(201).json(message);
+    // Create the message
+    const newMessage = await Message.create({ content, puzzleNumber, userId });
+
+    // Fetch the message along with the associated user
+    const messageWithUser = await Message.findOne({
+      where: { id: newMessage.id },
+      include: [{ model: User, attributes: ['id', 'username', 'image'] }],
+    });
+
+    res.status(201).json(messageWithUser);
   } catch (err) {
     next(err);
   }
 });
+
 
 // Delete a message
 router.delete('/:id', async (req, res, next) => {
