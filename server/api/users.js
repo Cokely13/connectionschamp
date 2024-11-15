@@ -19,6 +19,10 @@ const s3Client = new S3Client({
   },
 });
 
+if (!process.env.AWS_REGION || !process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY || !process.env.S3_BUCKET_NAME) {
+  console.error('Missing AWS environment variables. Ensure they are set in Heroku.');
+}
+
 // Set up multer for file uploads with S3
 const upload = multer({
   storage: multerS3({
