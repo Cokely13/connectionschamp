@@ -1693,3 +1693,9 @@ h1, h2, h3, h4, h5, h6 {
 .message-post-button{
   margin-left: 10px;
 }
+
+.home-logo {
+  text-align: center;
+  margin-top: 100px;
+  /* margin-bottom: 20px; */
+}

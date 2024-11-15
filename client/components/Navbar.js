@@ -123,7 +123,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => {
                 {/* Rules Link */}
                 <li className="nav-item">
                 <span className="nav-link rules-link" onClick={openRulesModal}>
-                  Rules <i className="fas fa-info-circle"></i>
+                  Instructions <i className="fas fa-info-circle"></i>
                 </span>
               </li>
 

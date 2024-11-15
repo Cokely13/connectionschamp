@@ -15,6 +15,9 @@ export const Home = (props) => {
       <div className="entries-wrapper">
         <Entries />
       </div>
+      {/* <div className="home-logo">
+        <img src="/logo.png" alt="Logo" className="auth-logo-image" />
+      </div> */}
       <Upload />
     </div>
   );
