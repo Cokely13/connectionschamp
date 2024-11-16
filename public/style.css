@@ -793,10 +793,10 @@
 }
 
 .user-img {
-  width: 40px;
-  height: 40px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  margin-right: 15px;
+  /* margin-right: 15px; */
   border: 2px solid #007bff;
   object-fit: cover;
   margin: 0 auto;
@@ -1609,7 +1609,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #c9302c;
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .message-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1638,7 +1638,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     border: 3px solid rgba(0,0,0,0.3);
   }
-}
+} */
 
 .message-timestamp {
   position: absolute;
@@ -1675,22 +1675,42 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 600px) {
-  .message-row {
+  /* .message-row {
     flex-direction: column;
     align-items: flex-start;
+    max-width: 30%;
+  } */
+
+  .message-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    margin-bottom: 15px; /* Add spacing between messages */
+  }
+
+  .user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #007bff;
+    object-fit: cover;
+    margin-right: 10px;
   }
 
   .user-info {
-    flex-direction: row;
+    display: flex;
     align-items: center;
-    margin-bottom: 10px;
-    width: auto;
-    margin-right: 0;
+    margin-right: 15px;
   }
 
   .user-info .message-username {
     margin-left: 10px;
     margin-top: 0;
+  }
+
+  .message-username {
+    font-weight: bold;
+    color: #333;
   }
 
   .message-content {
@@ -1713,6 +1733,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .message-post-button {
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
   }
 }
