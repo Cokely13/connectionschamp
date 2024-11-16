@@ -81,7 +81,7 @@ function Profile() {
 
       <div className="profile-info">
         <div><b>Email:</b> {user.email || 'N/A'}</div>
-        <div><b>Total Wins!!</b> {totalCorrect}</div>
+        <div><b>Total Wins:</b> {totalCorrect}</div>
         <div><b>Total Losses:</b> {totalIncorrect}</div>
         <div><b>Total Strikes:</b> {totalStrikes}</div>
       </div>
