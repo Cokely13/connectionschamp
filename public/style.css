@@ -1,6 +1,6 @@
 /* General Navbar Styles */
 .navbar {
-  background-color: gray;
+  background-color:  #333;
   color: white;
   border-bottom: 1px solid #2E3944;
   width: 100%;
@@ -92,7 +92,7 @@
 .nav-item .dropdown-menu {
   display: none;
   position: absolute;
-  background-color: gray;
+  background-color: #333;;
   top: 100%;
   left: 0;
   min-width: 160px;
@@ -145,7 +145,7 @@
     right: -250px;
     width: 250px;
     height: 100%;
-    background-color: gray;
+    background-color: #333;
     padding-top: 70px;
     transition: right 0.3s ease;
     z-index: 999;
@@ -1666,6 +1666,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .message-post-button{
   margin-left: 10px;
+  background-color: #007bff;
+  border: 1px solid #007bff;
 }
 
 .home-logo {
